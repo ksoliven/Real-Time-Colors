@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+
+    <title>Real Time Colors</title>
+    <script type="text/javascript">
+            $(document).ready(function (){
+            const socket = io(); //1
+            socket.emit('imconnected');
+            socket.on('updateAllClients', function (data) {
+                document.body.style.backgroundColor = data.color ;
+            });
+            $( "#red" ).click(function (){
+                socket.emit("red");
+            });
+            $( "#yellow" ).click(function (){
+                socket.emit("yellow");
+            });
+            $( "#green" ).click(function (){
+                socket.emit("green");
+            });
+            $("#blue").click(function () {
+                socket.emit("blue");
+            });
+            $("#black").click(function () {
+                socket.emit("black");
+            });
+        })
+        
+    </script>
+    <style>
+        * {
+            font-family: "Too Freakin Cute Demo";
+        }
+    
+        body {
+            font-size: 15px;
+            text-align: center;
+        }
+    
+        button {
+            width: 150px;
+            height: 75px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <br>
+    <br>
+    <h1 id="colors">Real Time Colors</h1>
+    <br>
+    <br>
+    <h4>Choose your background color for this website:</h4>
+    <br>
+    <br>
+    <button id="red" type="button" class="btn btn-danger" >Red</button>&nbsp;
+    <button id="yellow" type="button" class="btn btn-warning" >Yellow</button>&nbsp;
+    <button id="green" type="button" class="btn btn-success" >Green</button>&nbsp;
+    <button id="blue" type="button" class="btn btn-primary" >Blue</button> &nbsp;
+    <button id="black" type="button" class="btn btn-dark" >Black</button>
+    </div>
+</body>
+
+</html>
